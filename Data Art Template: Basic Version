@@ -1,0 +1,58 @@
+// ---- Data Art Template: Basic Version ----
+// Automatically adjusts to any data range
+
+let data = [2345, 8900, 7650, 10230, 4560, 6700, 9800, 12000]; 
+// Replace with your own dataset (e.g. steps, temperature, mood score)
+
+function setup() {
+  createCanvas(600, 400);
+  background(20);
+  noStroke();
+  textAlign(CENTER);
+  textSize(12);
+}
+
+function draw() {
+  background(20, 20, 30, 50);
+  let spacing = width / data.length;
+
+  // ---- Title ----
+  fill(255);
+  textSize(20);
+  text("My Data Visualization - Auto Scale Version", width / 2, 30);
+
+  // ---- Calculate min and max for scaling ----
+  let minValue = min(data);
+  let maxValue = max(data);
+
+  // ---- Data Visualization ----
+  for (let i = 0; i < data.length; i++) {
+    let x = spacing * i + spacing / 2;
+
+    // Automatically map data to the canvas height
+    let y = map(data[i], minValue, maxValue, height - 60, 100);
+    let size = map(data[i], minValue, maxValue, 10, 80);
+
+    // Color based on data value (blue → red)
+    colorMode(HSB);
+    let hue = map(data[i], minValue, maxValue, 180, 0);
+    fill(hue, 80, 100);
+    ellipse(x, y, size, size);
+    colorMode(RGB);
+
+    // ---- Label ----
+    fill(255);
+    textSize(12);
+    text(data[i].toFixed(0), x, height - 10);
+  }
+
+  // ---- Description ----
+  fill(255);
+  textSize(12);
+  text("Circles adapt automatically to your data range", width / 2, height - 20);
+
+  // ---- Animation effect ----
+  for (let i = 0; i < data.length; i++) {
+    data[i] = data[i] + random(-10, 10); // slightly move values
+  }
+}
