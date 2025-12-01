@@ -19,7 +19,7 @@ function draw() {
   // ---- Title ----
   fill(255);
   textSize(20);
-  text("My Data Visualization - Auto Scale Version", width / 2, 30);
+  text("My Data Visualization - Basic Version", width / 2, 30);
 
   // ---- Calculate min and max for scaling ----
   let minValue = min(data);
